@@ -25,10 +25,14 @@ export default class Register extends Component {
             .catch((err) => {
                 if (err.code === 'auth/invalid-email') {
                     this.messageAuth('Email Invalido');
-                };
-                if (err.code === 'auth/weak-password') {
+                }
+                else if (err.code === 'auth/weak-password') {
                     this.messageAuth('Senha Fraca');
-                } else {
+                }
+                else if (err.code === 'auth/email-already-in-use') {
+                    this.messageAuth('Email Já cadastrado');
+                }
+                else {
                     alert(err.code)
                 }
             });
