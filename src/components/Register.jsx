@@ -9,7 +9,6 @@ export default class Register extends Component {
         message: ''
     }
 
-
     handlerInputs = (e) => {
         let state = this.state;
         state[e.target.name] = e.target.value;

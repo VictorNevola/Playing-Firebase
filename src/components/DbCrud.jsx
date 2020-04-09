@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../fireConnection';
-
+import Header from '../components/Header';
 
 export default class DbCrud extends Component {
     state = {
@@ -69,10 +69,6 @@ export default class DbCrud extends Component {
             default:
                 break;
         }
-
-
-
-
     };
 
     remover = (e) => {
@@ -94,19 +90,32 @@ export default class DbCrud extends Component {
             });
             document.querySelector("#root > div > div:nth-child(2) > div:nth-child(1) > form > input[type=text]:nth-child(2)").focus();
         });
+    };
+
+    logout = (e) => {
+        firebase.auth().signOut()
+            .then((succes) => {
+                this.props.history.push("/");
+            })
     }
 
     render() {
         return (
             <div>
+                <Header way={
+                    [
+                        { way: '/', nameWay: "Home" },
+                    ]
+                } />
+                <button onClick={this.logout}>Sair</button>
                 <div>
                     <h2>Cria um novo usuario no banco</h2>
                     <form >
                         <label> Nome: </label>
-                        <input type="text" value={this.state.name} name='name' onChange={this.handlerInputs} required/>
+                        <input type="text" value={this.state.name} name='name' onChange={this.handlerInputs} required />
 
                         <label> idade: </label>
-                        <input type="text" value={this.state.age} name='age' onChange={this.handlerInputs} required/>
+                        <input type="text" value={this.state.age} name='age' onChange={this.handlerInputs} required />
 
                         <button type="submit" value={this.state.key} name={this.state.button} onClick={this.cadastrar}>{this.state.button}</button>
                     </form>
