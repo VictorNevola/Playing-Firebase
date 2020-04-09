@@ -23,7 +23,8 @@ export default class DbCrud extends Component {
                 state.list.push({
                     key: childItem.key,
                     nome: childItem.val().nome,
-                    idade: childItem.val().idade
+                    idade: childItem.val().idade,
+                    email: childItem.val().email,
                 })
             })
             this.setState(state);
@@ -88,7 +89,7 @@ export default class DbCrud extends Component {
                 button: 'Salvar',
                 key: snapshot.key,
             });
-            document.querySelector("#root > div > div:nth-child(2) > div:nth-child(1) > form > input[type=text]:nth-child(2)").focus();
+            document.querySelector("#focus").focus();
         });
     };
 
@@ -112,7 +113,7 @@ export default class DbCrud extends Component {
                     <h2>Cria um novo usuario no banco</h2>
                     <form >
                         <label> Nome: </label>
-                        <input type="text" value={this.state.name} name='name' onChange={this.handlerInputs} required />
+                        <input id='focus' type="text" value={this.state.name} name='name' onChange={this.handlerInputs} required />
 
                         <label> idade: </label>
                         <input type="text" value={this.state.age} name='age' onChange={this.handlerInputs} required />
@@ -130,6 +131,7 @@ export default class DbCrud extends Component {
                                         <li key={user.key}>
                                             <h3>Nome: {user.nome} </h3>
                                             <h3>Idade: {user.idade} </h3>
+                                            <h3>Email: {user.email} </h3>
                                             <button onClick={this.update} value={user.key}>Editar</button>
                                             <button onClick={this.remover} value={user.key}>Remover</button>
                                         </li>
